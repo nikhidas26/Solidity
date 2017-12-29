@@ -1,15 +1,12 @@
 pragma solidity ^0.4.0;
 
-contract MyContract {
+import "mortal.sol";
+
+contract MyContract is mortal {
     
     uint myVariable;
     
     address owner;
-    
-    modifier onlyOwner() {
-        require(msg.sender == owner);
-        _;
-    }
     
     function MyContract() payable public {
         myVariable = 5;
@@ -26,10 +23,6 @@ contract MyContract {
     
     function getMyContractBalance() public constant returns(uint) {
         return this.balance;
-    }
-    
-    function kill() public onlyOwner {
-        selfdestruct(owner);
     }
     
     function () payable public {
